@@ -1,0 +1,26 @@
+{
+  "name": "angular2-powerbi",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diego-d5000/PowerBI-Angular2"
+  },
+  "author": {
+    "name": "Diego Plascencia",
+    "email": "diego-d@outlook.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diego-d5000/PowerBI-Angular2/issues"
+  },
+  "module": "angular2-powerbi.js",
+  "typings": "angular2-powerbi.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

@@ -6,6 +6,9 @@ import { PowerBIComponentComponent } from './powerbi-component/powerbi-component
 export * from './sample.component';
 export * from './powerbi-component/powerbi-component.component'
 
+import { service as PBIService } from 'powerbi-client';
+export { service as PBIService } from 'powerbi-client';
+
 @NgModule({
   imports: [
     CommonModule
@@ -14,15 +17,16 @@ export * from './powerbi-component/powerbi-component.component'
     PowerBIComponentComponent,
     SampleComponent
   ],
+  providers: [PBIService.service],
   exports: [
     PowerBIComponentComponent,
     SampleComponent
   ]
 })
-export class SampleModule {
+export class PowerBIModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SampleModule
+      ngModule: PowerBIModule
     };
   }
 }

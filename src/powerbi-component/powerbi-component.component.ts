@@ -13,8 +13,6 @@ import { service as PBIService, IEmbedConfiguration, Embed } from 'powerbi-clien
 @Component({
   selector: 'powerbi-component',
   template: '<div class="powerbi-frame" #powerbiFrame></div>',
-  styleUrls: ['./powerbi-component.component.css'],
-  providers: [PBIService.Service]
 })
 export class PowerBIComponentComponent implements OnInit, OnChanges {
   powerBIService: PBIService.Service;
@@ -31,7 +29,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   ngOnInit() {
     const { accessToken, embedUrl } = this;
     if (this.validateOptions(accessToken, embedUrl)) {
-      this.powerBIService.embed(this.powerbiFrame, <IEmbedConfiguration>{ accessToken, embedUrl })
+      this.powerBIService.embed(this.powerbiFrame, <IEmbedConfiguration>{ accessToken, embedUrl });
     }
   }
 
@@ -61,7 +59,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   }
 
   embed(element: HTMLElement, accessToken: string, embedUrl: string) {
-    this.powerBIService.embed(element, <IEmbedConfiguration>{ accessToken, embedUrl })
+    this.powerBIService.embed(element, <IEmbedConfiguration>{ accessToken, embedUrl });
     this.onEmbedded({ embed: this.component });
   }
 

@@ -1,26 +1,26 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SampleComponent } from './sample.component';
-import { PowerBIComponentComponent } from './powerbi-component/powerbi-component.component';
+import { PowerBIComponentComponent } from './powerbi-component.component';
+import { service as PBIService, factories } from 'powerbi-client';
 
-export * from './sample.component';
-export * from './powerbi-component/powerbi-component.component'
+export * from './powerbi-component.component'
 
-import { service as PBIService } from 'powerbi-client';
-export { service as PBIService } from 'powerbi-client';
+export function powerBiServiceFactory() {
+  return new PBIService.Service(factories.hpmFactory, factories.wpmpFactory, factories.routerFactory);
+}
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    PowerBIComponentComponent,
-    SampleComponent
+    PowerBIComponentComponent
   ],
-  providers: [PBIService.service],
+  providers: [
+    { provide: 'PowerBIService', useFactory: powerBiServiceFactory } //To inject a instance of pbi client library 
+  ],
   exports: [
-    PowerBIComponentComponent,
-    SampleComponent
+    PowerBIComponentComponent
   ]
 })
 export class PowerBIModule {

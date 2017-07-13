@@ -40,6 +40,7 @@
     "core-js": "^2.4.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-rollup": "^2.11.0",
     "jasmine-core": "~2.5.2",
@@ -53,6 +54,7 @@
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",
+    "powerbi-client": "^2.3.2",
     "protractor": "~5.1.0",
     "rollup": "^0.41.6",
     "run-sequence": "^1.2.2",
@@ -64,8 +66,5 @@
   },
   "engines": {
     "node": ">=6.0.0"
-  },
-  "dependencies": {
-    "powerbi-client": "^2.3.2"
   }
 }

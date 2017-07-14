@@ -44,7 +44,8 @@ Once your library is imported, you can use its components:
 <h1>
   {{title}}
 </h1>
-<powerbi-component embed-url="vm.report.embedUrl" access-token="vm.report.accessToken"></powerbi-component>
+<powerbi-component embedUrl="https://app.powerbi.com/reportEmbed?reportId=bd851208e"
+accessToken="H4sIAAAAAAAEAB2WtQ70CBKE3" type="report" id="bd851208"></powerbi-component> 
 ```
 
 ## Development

@@ -17,7 +17,7 @@ export function powerBiServiceFactory() {
     PowerBIComponentComponent
   ],
   providers: [
-    { provide: 'PowerBIService', useFactory: powerBiServiceFactory } //To inject a instance of pbi client library 
+    { provide: 'PowerBIService', useFactory: powerBiServiceFactory } // To inject a instance of pbi client library
   ],
   exports: [
     PowerBIComponentComponent

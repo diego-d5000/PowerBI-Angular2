@@ -8,7 +8,8 @@ import {
   Inject,
   Output,
   ViewChild,
-  ElementRef
+  ElementRef,
+  EventEmitter
 } from '@angular/core';
 import { service as PBIService, IEmbedConfiguration, Embed } from 'powerbi-client';
 
@@ -23,7 +24,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   @Input() embedUrl: string;
   @Input() type: string;
   @Input() id: string;
-  @Output() onEmbedded: Function;
+  @Output() embedded: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('powerbiFrame') powerbiFrame: ElementRef;
 
 
@@ -63,7 +64,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
    * Validates if needed accessToken and embedUrl aren't empty and are strings
    * @param {string} accessToken - access token to embed component, obtained through pbi rest api
    * @param {string} embedUrl - url obtained through pbi rest api or pbi app
-   * @return {boolean} 
+   * @return {boolean}
    */
   validateOptions(accessToken: string, embedUrl: string): boolean {
     if (!(typeof embedUrl === 'string' && embedUrl.length > 0)
@@ -75,19 +76,19 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Executes an embeding operation with pbi client library 
+   * Executes an embeding operation with pbi client library
    * and assign the embed component to a property
    * @param {HTMLEelement} element - native element to embed pbi dashboard, report, or whatever
    * @param {IEmbedConfiguration} config - configuration to embed
    * @param {string} config.accessToken - access token to embed component, obtained through pbi rest api
    * @param {string} config.tokenType - type of accessToken, the most common is TokenType.Embed
-   * @param {string} config.embedUrl - url obtained through pbi rest api or pbi app 
+   * @param {string} config.embedUrl - url obtained through pbi rest api or pbi app
    * @param {string} config.type - type of embedded component, like 'report' or 'dashboard'
    * @param {string} config.id - component/element id like '5dac7a4a-4452-46b3-99f6-a25915e0fe55'
    */
   embed(element: HTMLElement, config: IEmbedConfiguration) {
     this.component = this.powerBIService.embed(element, config);
-    this.onEmbedded({ embed: this.component });
+    this.embedded.emit(this.component);
   }
 
   /**

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PowerBIComponentComponent } from './powerbi-component.component';
-import 'jasmine';
+import { powerBiServiceFactory } from './';
 
 describe('PowerbiComponentComponent', () => {
   let component: PowerBIComponentComponent;
@@ -8,6 +8,7 @@ describe('PowerbiComponentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [{ provide: 'PowerBIService', useFactory: powerBiServiceFactory }],
       declarations: [ PowerBIComponentComponent ]
     })
     .compileComponents();

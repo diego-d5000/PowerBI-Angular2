@@ -30,3 +30,9 @@ Desktop.ini
 
 # Build files
 dist/*
+
+# Karma transform
+init-test-bed.spec.js
+
+# coverage
+coverage

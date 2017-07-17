@@ -3,7 +3,6 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
-  SimpleChange,
   Input,
   Inject,
   Output,
@@ -41,17 +40,24 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const accessTokenChange: SimpleChange = changes.accessToken;
-    const embedUrlChange: SimpleChange = changes.embedUrl;
+    const { accessToken, tokenType, embedUrl, type, id } = changes;
 
-    if (accessTokenChange.previousValue === accessTokenChange.currentValue
-      || embedUrlChange.previousValue === embedUrlChange.previousValue) {
+    if (accessToken.previousValue === accessToken.currentValue
+      || embedUrl.previousValue === embedUrl.currentValue) {
       return;
     }
 
-    if (this.validateOptions(this.accessToken, this.embedUrl)) {
-      const { accessToken, tokenType, embedUrl, type, id } = this;
-      let config: IEmbedConfiguration = { accessToken, tokenType, embedUrl, type, id };
+    if (this.validateOptions(accessToken.currentValue, embedUrl.currentValue)) {
+
+      /* check if change value was provided in changes
+       to prevent error accessing to a property of undefined */
+      let config: IEmbedConfiguration = {
+        accessToken: accessToken && accessToken.currentValue,
+        tokenType: tokenType && tokenType.currentValue,
+        embedUrl: embedUrl && embedUrl.currentValue,
+        type: type && type.currentValue,
+        id: id && id.currentValue
+      };
 
       this.embed(this.powerbiFrame.nativeElement, config);
     } else if (this.component) {

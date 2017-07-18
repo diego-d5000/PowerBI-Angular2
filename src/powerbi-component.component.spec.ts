@@ -59,7 +59,7 @@ describe('PowerbiComponentComponent', () => {
       accessToken: 'H4sIAAAAAAAEAB2WtQ70CBKE3',
       embedUrl: 'https://app.powerbi.com/reportEmbed?reportId=bd851208e',
       type: 'report',
-      id: 'bd851208',
+      id: 'bd851208e',
     };
 
     // convert simple values into SimpleChange object to be readeable by ngOnChnages

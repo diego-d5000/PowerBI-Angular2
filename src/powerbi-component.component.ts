@@ -14,7 +14,7 @@ import { service as PBIService, IEmbedConfiguration, Embed } from 'powerbi-clien
 
 @Component({
   selector: 'powerbi-component',
-  template: '<div class="powerbi-frame" #powerbiFrame></div>',
+  template: '<div style="height:100%; width: 100%;" class="powerbi-frame" #powerbiFrame></div>',
 })
 export class PowerBIComponentComponent implements OnInit, OnChanges {
   component: Embed;

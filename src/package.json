@@ -24,6 +24,6 @@
     "zone.js": "^0.8.4"
   },
   "dependencies": {
-    "powerbi-client": "^2.3.2"
+    "powerbi-client": "2.3.1"
   }
 }

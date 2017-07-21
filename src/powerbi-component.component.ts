@@ -10,7 +10,7 @@ import {
   ElementRef,
   EventEmitter
 } from '@angular/core';
-import { service as PBIService, IEmbedConfiguration, Embed } from 'powerbi-client';
+import { service as PBIService, IEmbedConfiguration, Embed, models } from 'powerbi-client';
 
 @Component({
   selector: 'powerbi-component',
@@ -32,7 +32,8 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const { accessToken, tokenType, embedUrl, type, id } = this;
-    let config: IEmbedConfiguration = { accessToken, tokenType, embedUrl, type, id };
+
+    let config: IEmbedConfiguration = { accessToken, tokenType: this.getTokenType(tokenType), embedUrl, type, id };
 
     if (this.validateOptions(accessToken, embedUrl)) {
       this.embed(this.powerbiFrame.nativeElement, config);
@@ -53,7 +54,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
        to prevent error accessing to a property of undefined */
       let config: IEmbedConfiguration = {
         accessToken: accessToken && accessToken.currentValue,
-        tokenType: tokenType && tokenType.currentValue,
+        tokenType: tokenType ? this.getTokenType(tokenType.currentValue) : models.TokenType.Aad,
         embedUrl: embedUrl && embedUrl.currentValue,
         type: type && type.currentValue,
         id: id && id.currentValue
@@ -82,6 +83,23 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Get the token type class or enum from string ('Embed' or 'Aad')
+   * @param {string} tokenType - token type class name in string it must be 'Embed' or 'Aad'
+   * @return {models.TokenType}
+   */
+  getTokenType(tokenType: string): models.TokenType {
+    // convert token type string to model class to avoid import of powerbi-client in app
+    if (!tokenType || tokenType.length < 0) {
+      // default is AAD
+      return models.TokenType.Aad;
+    } else {
+      // capitalize
+      tokenType = tokenType.charAt(0).toUpperCase() + tokenType.toLowerCase().slice(1);
+      return models.TokenType[tokenType];
+    }
+  }
+
+  /**
    * Executes an embeding operation with pbi client library
    * and assign the embed component to a property
    * @param {HTMLEelement} element - native element to embed pbi dashboard, report, or whatever
@@ -94,7 +112,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
    */
   embed(element: HTMLElement, config: IEmbedConfiguration) {
     this.component = this.powerBIService.embed(element, config);
-    this.embedded.emit(this.component);
+    this.embedded.emit((this.component as any));
   }
 
   /**

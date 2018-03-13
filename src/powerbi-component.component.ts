@@ -1,7 +1,7 @@
 import {
   Component,
-  OnInit,
   OnChanges,
+  AfterViewInit,
   SimpleChanges,
   Input,
   Inject,
@@ -16,7 +16,7 @@ import { service as PBIService, IEmbedConfiguration, Embed, models } from 'power
   selector: 'powerbi-component',
   template: '<div style="height:100%; width: 100%;" class="powerbi-frame" #powerbiFrame></div>',
 })
-export class PowerBIComponentComponent implements OnInit, OnChanges {
+export class PowerBIComponentComponent implements AfterViewInit, OnChanges {
   component: Embed;
   @Input() accessToken: string;
   @Input() tokenType: string;
@@ -30,7 +30,7 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   constructor( @Inject('PowerBIService') public powerBIService: PBIService.Service) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     const { accessToken, tokenType, embedUrl, type, id } = this;
 
     let config: IEmbedConfiguration = { accessToken, tokenType: this.getTokenType(tokenType), embedUrl, type, id };

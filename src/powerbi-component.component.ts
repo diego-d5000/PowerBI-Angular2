@@ -43,6 +43,10 @@ export class PowerBIComponentComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const { accessToken, tokenType, embedUrl, type, id } = changes;
 
+    if (accessToken.isFirstChange() && embedUrl.isFirstChange()) {
+      return;
+    }
+
     if (accessToken.previousValue === accessToken.currentValue
       || embedUrl.previousValue === embedUrl.currentValue) {
       return;
